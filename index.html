@@ -1,0 +1,122 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dressing Chart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        main {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #calculationForm,
+        #newDataForm {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        #calculationForm .form-row,
+        #newDataForm .form-row {
+            align-items: flex-end;
+        }
+
+        #calculationForm .form-group.col-md-4,
+        #newDataForm .form-group.col-md-2 {
+            margin-bottom: 0;
+        }
+
+        #resultTables {
+            width: 100%;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .table-container {
+            margin-top: 20px;
+        }
+
+        .form-group.text-left {
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="bg-dark text-white text-center py-4">
+        <nav>
+            <h1>Usage and Loss Calculation</h1>
+        </nav>
+    </header>
+
+    <main class="container mt-4">
+        <form id="calculationForm">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="itemType">Select Item Type:</label>
+                    <select class="form-control" id="size" name="size">
+                        <option value="0">Select</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="quantity">Enter Quantity:</label>
+                    <input type="number" class="form-control" id="quantity" name="quantity" required>
+                </div>
+            </div>
+
+            <div class="form-group text-left">
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
+            </div>
+        </form>
+
+        <div id="result" hidden=False>
+            <div id="resultTables" class="table-container">
+                <h4>Required/Loss</h4>
+                <table id="resultTable" class="table">
+                    <thead id='tablehead'>
+
+                    </thead>
+                    <tbody id="tablebody">
+
+                    </tbody>
+                </table>
+            </div>
+            <h6 id = "avgLoss">Avg Loss: </h6>
+            <div id="lossForm">
+                <h4>Material used</h4>
+                <p><i>Enter the quantity used in the below fields</i></p>
+                <form id="newDataForm">
+                    <div class="form-row" id="lossCalc">
+
+                    </div>
+                    <br>
+                    <div class="form-group text-left">
+                        <button type="button" class="btn btn-primary" id="clearButton"
+                            onclick="lossCalc()">Calculate</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="constants.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', populateSize);
+        document.getElementById('size').addEventListener('click', function () {
+            var defaultOption = this.querySelector('option[value="0"]');
+            if (defaultOption) this.removeChild(defaultOption);
+        });
+    </script>
+</body>
+
+</html>
